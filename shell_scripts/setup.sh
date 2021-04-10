@@ -29,7 +29,8 @@ else
                          zlib1g-dev swig libpulse-dev libasound2-dev libevent-dev
     sudo apt-get update
 fi
-read -p "\nInstall Google Chrome & VScode? (y/n)" ok
+echo 
+read -p "Install Google Chrome & VScode? (y/n)" ok
 echo "\nInstalling Google Chrome..."
 echo
 wget https://dl.google.com/linux/direct/google-chrome-stable_current_amd64.deb
@@ -58,7 +59,6 @@ else
     exit 1
 fi
 echo n | sudo systemctl status postgresql
-echo
 echo n | sudo pg_isready
 echo "\nInstalling PgAdmin..."
 echo
@@ -80,5 +80,6 @@ pwd
 sudo git clone https://github.com/user/project.git
 sudo chmod +777 project/
 cd /home/path/foldername/project
-ls 
+sudo pip install -e .
+ls   
 echo 'Done!!!'
