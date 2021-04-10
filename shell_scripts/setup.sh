@@ -29,6 +29,7 @@ else
                          zlib1g-dev swig libpulse-dev libasound2-dev libevent-dev
     sudo apt-get update
 fi
+read -p "\nInstall Google Chrome & VScode? (y/n)" ok
 echo "\nInstalling Google Chrome..."
 echo
 wget https://dl.google.com/linux/direct/google-chrome-stable_current_amd64.deb
@@ -36,6 +37,9 @@ sudo dpkg -i google-chrome-stable_current_amd64.deb
 echo "\nInstalling VScode..."
 echo
 sudo snap install --classic code
+if ! [ $ok = "y" -o $ok = "Y" ]; then 
+    echo '\nIgnoring...'
+fi
 echo "\nInstalling Postgres & PgAdmin..."
 echo
 sudo apt -y install postgresql 
@@ -53,9 +57,9 @@ else
     echo '\nPostgres error exiting!!!'
     exit 1
 fi
-OUTPUT=$(sudo pg_isready)
-echo "\n${OUTPUT}"
-export PATH=/usr/lib/postgresql/X.Y/bin/:$PATH
+echo n | sudo systemctl status postgresql
+echo
+echo n | sudo pg_isready
 echo "\nInstalling PgAdmin..."
 echo
 curl https://www.pgadmin.org/static/packages_pgadmin_org.pub | sudo apt-key add
